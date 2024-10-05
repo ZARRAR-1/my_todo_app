@@ -1,6 +1,6 @@
 # my_todo_app
 
-A new Flutter project featuring a ToDo List based on MVC - Model View Controller architecture. Ideal for learning.
+A new Flutter project featuring a ToDo List based on MVC - Model View Controller architecture along with proper setters & getters for the model class. Ideal for learning.
 
 ## Screenshot
 
