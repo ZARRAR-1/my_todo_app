@@ -1,4 +1,4 @@
-import 'model.dart';
+import '../model_data/model.dart';
 
 class TaskListController {
   List<Task> tasks = [
@@ -10,5 +10,9 @@ class TaskListController {
   //Controller is just triggering business logic:
   void toggleTaskCompletion(int index) {
     tasks[index].setStatus(!tasks[index].status);
+  }
+
+  static TaskListController initController() {
+    return TaskListController();
   }
 }

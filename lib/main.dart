@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'task_controller.dart';
-import 'task_list_view.dart';
+import 'controllers/task_controller.dart';
+import 'views/task_list_view.dart';
+
 
 void main() {
   runApp(TaskListApp());
 }
 
 class TaskListApp extends StatelessWidget {
-  final TaskListController controller = TaskListController();
+  final TaskListController controller = TaskListController.initController();
 
   TaskListApp({super.key});
 
