@@ -1,6 +1,11 @@
+import 'package:my_todo_app/services/database_service.dart';
+
 class Task {
   String _title;
   bool _completed;
+
+  final DatabaseService _databaseService = DatabaseService.instance;
+
 
   Task(this._title, this._completed);
 
