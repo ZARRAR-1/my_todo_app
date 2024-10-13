@@ -11,7 +11,15 @@ Widget addTaskButton(BuildContext context) {
             mainAxisSize: MainAxisSize.min,
             children: [
               TextField(
-                decoration: InputDecoration(),
+                onChanged: (value) {
+                  setState(() {
+
+                  }); //Problem: setState Not available here.
+                },
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: 'Add a task...',
+                ),
               ),
               MaterialButton(
                 onPressed: () {},
