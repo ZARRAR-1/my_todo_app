@@ -1,6 +1,6 @@
 import 'package:my_todo_app/services/database_service.dart';
 
-class Task {
+class Task{
   String _title;
   bool _completed;
 

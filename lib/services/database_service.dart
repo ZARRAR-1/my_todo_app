@@ -32,6 +32,7 @@ class DatabaseService {
     final databasePath = join(databaseDirPath, "master_db.db");
     //Now Creating a database:
     final database = await openDatabase(
+      version: 1,
       databasePath,
       onCreate: (db, version) {
         db.execute('''
