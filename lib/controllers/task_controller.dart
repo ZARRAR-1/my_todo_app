@@ -7,11 +7,22 @@ class TaskListController {
   //   Task('Task 3', false),
   // ];
 
-  List<Task> tasks = [];
+  // List<Task> tasks = [];
 
   //Controller is just triggering business logic:
   void toggleTaskCompletion(int index) {
     // tasks[index].setStatus(!tasks[index].status);
+
+    //TODO: Use the Task's databaseService object to call update task method, here.
+  }
+
+  //TODO: Use the Task's databaseService object to call delete task method, here.
+
+  //TODO: Use the Task's databaseService object to call Add task method, here.
+
+  void addNewTask(String content)
+  {
+    Task.databaseService.addTask(content);
   }
 
   static TaskListController initController() {

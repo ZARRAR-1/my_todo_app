@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_todo_app/controllers/task_controller.dart';
 
 import '../model_data/task_model.dart';
-import '../services/database_service.dart';
+
 // import 'custom_widgets/add_task_button.dart';
 
 class TaskListView extends StatefulWidget {
@@ -15,31 +15,33 @@ class TaskListView extends StatefulWidget {
 }
 
 class _TaskListViewState extends State<TaskListView> {
+  String? _newTask;
+
   @override
   Widget build(BuildContext context) {
     return Column(
       // mainAxisSize: MainAxisSize.min,
       children: [
         FutureBuilder(
-          future: Task.databaseService.getTasks(), //Getting/Loading Task List via Model Class
+          future: Task.databaseService.getTasks(), //Loading Task List via Model Class
           builder: (context, snapshot) {
-            return Container();
-            //   ListView.builder(
-            //   itemCount: widget.controller.tasks.length,
-            //   itemBuilder: (context, index) {
-            //     final task = widget.controller.tasks[index];
-            //     return ListTile(
-            //       title: Text(task.title),
-            //       leading: Checkbox(
-            //         value: task.status == 1,
-            //         onChanged: (value) {
-            //           setState(
-            //               () => widget.controller.toggleTaskCompletion(index));
-            //         },
-            //       ),
-            //     );
-            //   },
-            // );
+            return ListView.builder(
+              itemCount: snapshot.data?.length ?? 0,
+              itemBuilder: (context, index) {
+                final task = snapshot.data![index];
+                return ListTile(
+                  title: Text(task.title),
+                  leading: Checkbox(
+                    value: task.status == 1,
+                    onChanged: (value) {
+                      setState(
+                        () => widget.controller.toggleTaskCompletion(index),
+                      );
+                    },
+                  ),
+                );
+              },
+            );
           },
         ),
         FloatingActionButton(
@@ -53,7 +55,9 @@ class _TaskListViewState extends State<TaskListView> {
                   children: [
                     TextField(
                       onChanged: (value) {
-                        setState(() {});
+                        setState(() {
+                          _newTask = value;
+                        });
                       },
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
@@ -61,7 +65,17 @@ class _TaskListViewState extends State<TaskListView> {
                       ),
                     ),
                     MaterialButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        if (_newTask == null || _newTask == "") {
+                          return;
+                        } else {
+                          widget.controller.addNewTask(_newTask!);
+                          setState(() {
+                            _newTask = null;
+                          });
+                          Navigator.pop(context);
+                        }
+                      },
                     ),
                   ],
                 ),

@@ -1,4 +1,5 @@
 import 'package:my_todo_app/model_data/task_list_model.dart';
+import 'package:my_todo_app/model_data/task_model.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -52,16 +53,23 @@ class DatabaseService {
     await db.insert(
       _tasksTableName,
       {
-        _tasksContentColoumName : taskContent,
-        _tasksStatusColoumName : 0,
+        _tasksContentColoumName: taskContent,
+        _tasksStatusColoumName: 0,
       },
     );
   }
 
-  Future<List<TaskList>?> getTasks() async
-  {
+  Future<List<Task>> getTasks() async {
     final db = await database;
     final data = await db.query(_tasksTableName);
-    print(data);
+    List<Task> ToDOs = data
+        .map(
+          (e) => Task(
+              content: e["content"] as String,
+              id: e["id"] as int,
+              status: e["status"] as int),
+        )
+        .toList();
+    return ToDOs;
   }
 }

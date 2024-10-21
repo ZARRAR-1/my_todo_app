@@ -7,12 +7,7 @@ import 'views/task_list_view.dart';
 
 void main() {
   runApp(
-    ChangeNotifierProvider(
-      create: (BuildContext context) {
-        return TaskList(); //Our List of Tasks
-      },
-      child: ToDoApp(),
-    ),
+    ToDoApp(),
   );
 }
 
