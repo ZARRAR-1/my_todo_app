@@ -1,3 +1,4 @@
+import 'package:my_todo_app/model_data/task_list_model.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -55,5 +56,12 @@ class DatabaseService {
         _tasksStatusColoumName : 0,
       },
     );
+  }
+
+  Future<List<TaskList>?> getTasks() async
+  {
+    final db = await database;
+    final data = await db.query(_tasksTableName);
+    print(data);
   }
 }

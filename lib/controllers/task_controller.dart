@@ -7,9 +7,11 @@ class TaskListController {
   //   Task('Task 3', false),
   // ];
 
+  List<Task> tasks = [];
+
   //Controller is just triggering business logic:
   void toggleTaskCompletion(int index) {
-    tasks[index].setStatus(!tasks[index].status);
+    // tasks[index].setStatus(!tasks[index].status);
   }
 
   static TaskListController initController() {

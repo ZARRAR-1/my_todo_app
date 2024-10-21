@@ -1,28 +1,29 @@
 import 'package:my_todo_app/services/database_service.dart';
 
-class Task{
-  String _title;
-  bool _completed;
+class Task {
+  String content;
+  int id, status;
 
-  final DatabaseService _databaseService = DatabaseService.instance;
+  Task({required this.content, required this.id, required this.status});
 
+  // bool _completed;
 
-  Task(this._title, this._completed);
+  static final DatabaseService databaseService = DatabaseService.instance;
 
   //Business Logic:
 
   //Setters
-  void setTitle(String newTitle){
-    _title = newTitle;
-  }
+  // void setTitle(String newTitle) {
+  //   content = newTitle;
+  // }
 
-  void setStatus(bool newStatus){
-    _completed = newStatus;
+  void setStatus(bool newStatus) {
+    newStatus == true ? status = 1 : status = 0 ;
+    // status = newStatus;
   }
 
   //Getters
-  get status => _completed;
-  get title => _title;
+  get taskStatus => status;
 
-
+  get title => content;
 }
