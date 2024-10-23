@@ -3,8 +3,6 @@ import 'package:my_todo_app/controllers/task_controller.dart';
 
 import '../model_data/task_model.dart';
 
-// import 'custom_widgets/add_task_button.dart';
-
 class TaskListView extends StatefulWidget {
   final TaskListController controller;
 
@@ -32,11 +30,12 @@ class _TaskListViewState extends State<TaskListView> {
                   final task = snapshot.data![index];
                   return ListTile(
                     title: Text(task.title),
-                    leading: Checkbox(
+                    trailing: Checkbox(
                       value: task.status == 1,
                       onChanged: (value) {
                         setState(
-                          () => widget.controller.toggleTaskCompletion(index),
+                          () => widget.controller.toggleTaskCompletion(
+                              index, value == true ? 1 : 0),
                         );
                       },
                     ),
@@ -46,9 +45,8 @@ class _TaskListViewState extends State<TaskListView> {
             },
           ),
         ),
-        Positioned(
-          bottom: 16,
-          right: 16,
+        Align(
+          alignment: Alignment.bottomCenter,
           child: FloatingActionButton(
             onPressed: () {
               showDialog(
@@ -83,7 +81,7 @@ class _TaskListViewState extends State<TaskListView> {
                             Navigator.pop(context);
                           }
                         },
-                        child: Text('Done'),
+                        child: const Text('Done'),
                       ),
                     ],
                   ),

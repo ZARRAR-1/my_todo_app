@@ -1,4 +1,3 @@
-import 'package:my_todo_app/model_data/task_list_model.dart';
 import 'package:my_todo_app/model_data/task_model.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
@@ -71,5 +70,32 @@ class DatabaseService {
         )
         .toList();
     return ToDOs;
+  }
+
+  void updateTaskStatus(int id, int status) async {
+    final db = await database;
+    await db.update(
+      _tasksTableName,
+      {
+        _tasksStatusColoumName: status,
+      },
+      where: 'id = ?',
+      whereArgs: [
+        id,
+      ],
+    );
+  }
+
+  void deleteTask(
+    int id,
+  ) async {
+    final db = await database;
+    await db.delete(
+      _tasksTableName,
+      where: 'id = ?',
+      whereArgs: [
+        id,
+      ],
+    );
   }
 }
