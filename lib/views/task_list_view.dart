@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:my_todo_app/controllers/task_controller.dart';
 
@@ -27,15 +29,19 @@ class _TaskListViewState extends State<TaskListView> {
               return ListView.builder(
                 itemCount: snapshot.data?.length ?? 0,
                 itemBuilder: (context, index) {
+                  log('Index Value: $index');
                   final task = snapshot.data![index];
                   return ListTile(
                     title: Text(task.title),
                     trailing: Checkbox(
                       value: task.status == 1,
                       onChanged: (value) {
+                        log('Onchanged Value: $value');
                         setState(
-                          () => widget.controller.toggleTaskCompletion(
-                              index, value == true ? 1 : 0),
+                          () {
+                            widget.controller.toggleTaskCompletion(
+                                index, value == true ? 1 : 0);
+                          },
                         );
                       },
                     ),
