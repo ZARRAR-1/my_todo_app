@@ -26,6 +26,9 @@ class _TaskListViewState extends State<TaskListView> {
             future: Task.databaseService.getTasks(),
             //Loading Task List via Model Class
             builder: (context, snapshot) {
+              // log('Item Count: $snapshot.data.length);
+              print("snapshot.data.length: ");
+              print(snapshot.data?.length);
               return ListView.builder(
                 itemCount: snapshot.data?.length ?? 0,
                 itemBuilder: (context, index) {
@@ -37,11 +40,10 @@ class _TaskListViewState extends State<TaskListView> {
                       value: task.status == 1,
                       onChanged: (value) {
                         log('Onchanged Value: $value');
+                        widget.controller
+                            .toggleTaskCompletion(index, value == true ? 1 : 0);
                         setState(
-                          () {
-                            widget.controller.toggleTaskCompletion(
-                                index, value == true ? 1 : 0);
-                          },
+                          () {},
                         );
                       },
                     ),
@@ -64,9 +66,10 @@ class _TaskListViewState extends State<TaskListView> {
                     children: [
                       TextField(
                         onChanged: (value) {
-                          setState(() {
-                            _newTask = value;
-                          });
+                          // setState(() {
+                          //   _newTask = value;
+                          // });
+                          _newTask = value;
                         },
                         decoration: const InputDecoration(
                           border: OutlineInputBorder(),
